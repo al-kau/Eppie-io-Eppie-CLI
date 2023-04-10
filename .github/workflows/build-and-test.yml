@@ -21,7 +21,6 @@ jobs:
 
     env:
       Solution_Name: ./src/Eppie.CLI/Eppie.CLI.sln
-      Project_Name: ./src/Eppie.CLI/Eppie.CLI/Eppie.CLI.csproj
       
     steps:
     - name: Checkout
@@ -47,12 +46,12 @@ jobs:
 
     # Build the solution
     - name: Build the solution
-      run: dotnet build "$env:Project_Name" --nologo --configuration "$env:Configuration" -v d
+      run: dotnet build "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Solution_Name }}" -v d
       env:
         Configuration: ${{ matrix.configuration }}
         
     # Execute all unit tests
     - name: Execute unit tests
-      run: dotnet test "$env:Project_Name" --nologo --configuration "$env:Configuration" 
+      run: dotnet test "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Solution_Name }}" 
       env:
         Configuration: ${{ matrix.configuration }}
