@@ -40,15 +40,19 @@ jobs:
     
     - run: echo "$PWD"
       shell: bash
+      
+    - run: cat "$env:Project_Name"
+    
+    - run: cat "$env:Solution_Name"
 
     # Build the solution
     - name: Build the solution
-      run: dotnet build $env:Project_Name --nologo --configuration $env:Configuration -v d
+      run: dotnet build "$env:Project_Name" --nologo --configuration "$env:Configuration" -v d
       env:
         Configuration: ${{ matrix.configuration }}
         
     # Execute all unit tests
     - name: Execute unit tests
-      run: dotnet test $env:Project_Name --nologo --configuration $env:Configuration 
+      run: dotnet test "$env:Project_Name" --nologo --configuration "$env:Configuration" 
       env:
         Configuration: ${{ matrix.configuration }}
