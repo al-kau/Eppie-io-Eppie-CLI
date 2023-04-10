@@ -34,10 +34,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        
+    - run: dotnet --info
 
     # Build the solution
     - name: Build the solution
-      run: dotnet build $env:Solution_Name --nologo --configuration $env:Configuration 
+      run: dotnet build $env:Solution_Name --nologo --configuration $env:Configuration -v d
       env:
         Configuration: ${{ matrix.configuration }}
         
