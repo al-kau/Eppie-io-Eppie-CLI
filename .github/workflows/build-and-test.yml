@@ -14,9 +14,10 @@ jobs:
 
     strategy:
       matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
         configuration: [Debug, Release]
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
 
     env:
       Solution_Name: src/Eppie.CLI/Eppie.CLI.sln
