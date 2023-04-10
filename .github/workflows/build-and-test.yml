@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      Solution_Name: src/Eppie.CLI/Eppie.CLI.sln
+      Solution_Name: ./src/Eppie.CLI/Eppie.CLI.sln
       
     steps:
     - name: Checkout
