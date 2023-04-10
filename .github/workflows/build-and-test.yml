@@ -36,6 +36,9 @@ jobs:
         dotnet-version: 7.0.x
         
     - run: dotnet --info
+    
+    - run: echo "$PWD"
+      shell: bash
 
     # Build the solution
     - name: Build the solution
