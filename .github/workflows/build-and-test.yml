@@ -34,17 +34,15 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
- 
-    - run: cat ${{ env.Solution_Name }}
 
     # Build the solution
     - name: Build the solution
-      run: dotnet build "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Solution_Name }}" -v d
+      run: dotnet build "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Configuration }}" -v d
       env:
         Configuration: ${{ matrix.configuration }}
         
     # Execute all unit tests
     - name: Execute unit tests
-      run: dotnet test "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Solution_Name }}" 
+      run: dotnet test "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Configuration }}" 
       env:
         Configuration: ${{ matrix.configuration }}
