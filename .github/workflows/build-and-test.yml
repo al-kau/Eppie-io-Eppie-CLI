@@ -41,9 +41,9 @@ jobs:
     - run: echo "$PWD"
       shell: bash
       
-    - run: cat "$env:Project_Name"
+    - run: cat "${{ env.Project_Name }}"
     
-    - run: cat "$env:Solution_Name"
+    - run: cat ${{ env.Solution_Name }}
 
     # Build the solution
     - name: Build the solution
