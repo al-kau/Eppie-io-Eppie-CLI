@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      Solution_Name: ./src/Eppie.CLI/Eppie.CLI.sln
+      Solution_Name: src/Eppie.CLI/Eppie.CLI.sln
       
     steps:
     - name: Checkout
@@ -37,7 +37,7 @@ jobs:
 
     # Build the solution
     - name: Build the solution
-      run: dotnet build "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Configuration }}" -v d
+      run: dotnet build "${{ env.Solution_Name }}" --nologo --configuration "${{ env.Configuration }}"
       env:
         Configuration: ${{ matrix.configuration }}
         
