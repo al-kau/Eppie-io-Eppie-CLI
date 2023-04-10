@@ -34,14 +34,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-        
-    - run: dotnet --info
-    
-    - run: echo "$PWD"
-      shell: bash
-      
-    - run: cat "${{ env.Project_Name }}"
-    
+ 
     - run: cat ${{ env.Solution_Name }}
 
     # Build the solution
