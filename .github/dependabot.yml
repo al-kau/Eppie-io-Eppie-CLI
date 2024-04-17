@@ -20,9 +20,6 @@ updates:
       Microsoft:
         patterns:
           - "Microsoft.*"
-    labels:
-      - "dependencies"
-      - "nuget"
 
   - package-ecosystem: "gitsubmodule"
     directory: "/"                                  # Path to '.gitmodules' directory
@@ -36,9 +33,6 @@ updates:
       submodules:
         patterns:
           - "*"
-    labels:
-      - "dependencies"
-      - "gitsubmodule"
 
   - package-ecosystem: "github-actions"
     directory: "/"                                  # Workflow files stored in the default location
@@ -48,6 +42,3 @@ updates:
       - "al-kau"
       - "ValeraFinebits"
       - "anatolse"
-    labels:
-      - "dependencies"
-      - "actions"
