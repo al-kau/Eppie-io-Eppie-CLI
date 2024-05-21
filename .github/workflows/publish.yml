@@ -27,7 +27,7 @@ on:
         - arm
         - arm64
         - all
-        
+
 env:
   dotnet-version: 8.x
         
@@ -104,35 +104,14 @@ jobs:
 
     - id: version-number
       uses: finebits/github-actions/version-number@v1
-      
-    - name: 
-      run: |
-        echo "Current version: ${{ steps.version-number.outputs.suffix-githash-version }}"
-    
-    - name: Calculate version
-      id: number-version-information
-      uses: ./.github/actions/number-version-information
-
-    - name: New version
-      run: | 
-        echo "Short version: ${{ steps.number-version-information.outputs.version-short }}"
-        echo "Full version: ${{ steps.number-version-information.outputs.version-full }}"
-        echo "Major: ${{ steps.number-version-information.outputs.major }}"
-        echo "Minor: ${{ steps.number-version-information.outputs.minor }}"
-        echo "Patch: ${{ steps.number-version-information.outputs.patch }}"
-        echo "Build: ${{ steps.number-version-information.outputs.build }}"
-        echo "Attempt: ${{ steps.number-version-information.outputs.attempt }}"
-        echo "Today: ${{ steps.number-version-information.outputs.today }}"
-        echo "Revision: ${{ steps.number-version-information.outputs.revision }}"
-        echo "Suffix: ${{ steps.number-version-information.outputs.suffix }}"
 
     - name: Publish ${{ env.output-name }} [${{ env.version-short }}]
       run: |
         dotnet publish "${{ env.project-file }}" --output "${{ env.output }}" --configuration "${{ env.configuration }}" --framework "${{ env.framework }}" --runtime "${{ env.runtime }}" --property:Version="${{ env.version-full }}" ${{ env.publish-options }} 
       env:
         output: "${{ format(env.output-template, env.output-root, env.configuration, env.framework, env.runtime) }}"
-        version-full: "${{ steps.number-version-information.outputs.version-full }}"
-        version-short: "${{ steps.number-version-information.outputs.version-short }}"
+        version-full: "${{ steps.version-number.outputs.suffix-githash-version }}"
+        version-short: "${{ steps.version-number.outputs.suffix-version }}"
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
@@ -141,5 +120,5 @@ jobs:
         path: "${{ env.path }}"
       env:
         artifact-name: "${{ env.output-name }}"
-        version-short: "${{ steps.number-version-information.outputs.version-short }}"
+        version-short: "${{ steps.version-number.outputs.suffix-version }}"
         path: "${{ format(env.output-template, env.output-root, env.configuration, env.framework, env.runtime) }}"
