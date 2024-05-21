@@ -126,6 +126,8 @@ jobs:
   release:
     name: Release
     needs: publish
+    permissions:
+      contents: write
     
     runs-on: ubuntu-latest
     
