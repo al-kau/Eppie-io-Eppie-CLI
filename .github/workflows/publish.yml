@@ -122,3 +122,30 @@ jobs:
         artifact-name: "${{ env.output-name }}"
         version-short: "${{ steps.version-number.outputs.suffix-version }}"
         path: "${{ format(env.output-template, env.output-root, env.configuration, env.framework, env.runtime) }}"
+
+  release:
+    name: Release
+    needs: publish
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v1.1.0-test
+        release_name: Release v1.1.0-test
+        body: |
+          Changes in this Release
+            - First Change
+            - Second Change
+        draft: true
+        prerelease: false
