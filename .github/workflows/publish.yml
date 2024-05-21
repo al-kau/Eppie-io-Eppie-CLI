@@ -101,6 +101,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.dotnet-version }}
+
+    - id: version-number
+      uses: finebits/github-actions/version-number@v1
+      
+    - name: 
+      run: |
+        echo "Current version: ${{ steps.version-number.outputs.suffix-githash-version }}"
     
     - name: Calculate version
       id: number-version-information
