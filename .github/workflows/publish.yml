@@ -131,7 +131,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: "${{ env.output-name }} [${{ env.version-short }}]"
-        path: "${{ env.output }}/{{ env.runtime }}"
+        path: "${{ env.output }}/${{ env.runtime }}"
       env:
         artifact-name: "${{ env.output-name }}"
         version-short: "${{ steps.number-version-information.outputs.version-short }}"
