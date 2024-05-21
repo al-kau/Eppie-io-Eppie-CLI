@@ -130,7 +130,7 @@ jobs:
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: "${{ env.output-name }} [${{ env.version-short }}]"
+        name: "${{ env.output-name }}-${{ env.runtime }} [${{ env.version-short }}]"
         path: "${{ env.path }}"
       env:
         artifact-name: "${{ env.output-name }}"
