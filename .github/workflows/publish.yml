@@ -93,7 +93,6 @@ jobs:
     name: Publish
     needs: prepare
     if: needs.prepare.outputs.status == 'success'
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
@@ -142,10 +141,10 @@ jobs:
     name: Upload Assets
     if: github.event_name == 'release'
     needs: publish
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
-    runs-on: ubuntu-latest
     env:
       artifacts-root: artifacts
       assets-root: assets
@@ -159,11 +158,10 @@ jobs:
     - name: Prepare Assets
       shell: bash
       run: |
-
         asset_root="${{ env.assets-root }}"
-        artifact_pattern="${{ env.artifacts-root }}/*"
+        mkdir -p "${asset_root}"
         
-        mkdir "assets"
+        artifact_pattern="${{ env.artifacts-root }}/*"
         for item in $artifact_pattern ; do
           if [ -d "$item" ] ; then
             item_name="${item##*/}"
@@ -174,7 +172,6 @@ jobs:
             zip -r -j "$asset_root/$asset_name" "$item" && echo "Archiving of the asset '$asset_name' has been completed successfully." || echo "::warning::Failed to archive asset '$asset_name'"
           fi
         done
-
 
     - name: Upload All Assets
       uses: al-kau/finebits-github-actions/upload-release-asset@ac311f4d3e0a03220e22b63378f3ef0a006a5805 
